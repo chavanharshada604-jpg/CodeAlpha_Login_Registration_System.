@@ -1,5 +1,4 @@
-#// CodeAlpha C++ Internship - Task 2: Login and Registration System
-// NOTE: Passwords are salted + hashed (educational). For real apps use bcrypt/argon2.
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,7 +9,7 @@
 #include <ctime>
 using namespace std;
 
-const string USER_FILE = "users.txt";   // format: username salt hash
+const string USER_FILE = "users.txt"; // format: username salt hash
 
 // ---------- Helper functions ----------
 string makeSalt() {
@@ -56,9 +55,9 @@ bool usernameExists(const string &username) {
 void registerUser() {
     string username, password;
     cout << "\n--- REGISTRATION ---\n";
+
     cout << "Username (3-15 letters/digits/_): ";
     cin >> username;
-
     if (!validUsername(username)) {
         cout << "Error: Invalid username format.\n";
         return;
@@ -99,6 +98,7 @@ void loginUser() {
         cout << "Error: No users registered yet.\n";
         return;
     }
+
     string u, salt, h;
     while (in >> u >> salt >> h) {
         if (u == username) {
@@ -117,21 +117,23 @@ int main() {
     int choice;
     do {
         cout << "\n=========================\n";
-        cout << " LOGIN & REGISTRATION\n";
+        cout << "   LOGIN & REGISTRATION\n";
         cout << "=========================\n";
         cout << "1. Register\n2. Login\n3. Exit\nChoice: ";
+
         if (!(cin >> choice)) {
+            if (cin.eof()) break;          // input ended, stop the program
             cin.clear();
             cin.ignore(1000, '\n');
             choice = 0;
         }
+
         switch (choice) {
             case 1: registerUser(); break;
-            case 2: loginUser();    break;
+            case 2: loginUser(); break;
             case 3: cout << "Goodbye!\n"; break;
             default: cout << "Invalid choice. Try again.\n";
         }
     } while (choice != 3);
     return 0;
-} CodeAlpha_Login_Registration_System.
-C++ CGPA Calculator Project for CodeAlpha Internship
+}
